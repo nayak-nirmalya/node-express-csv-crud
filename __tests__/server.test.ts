@@ -103,3 +103,54 @@ describe("GET /api/v1/users/:id", () => {
     expect(res.body.user[0].address).toEqual("Puri");
   });
 });
+
+describe("PATCH /api/v1/users/:id", () => {
+  it("should update user details", async () => {
+    const payload = {
+      first_name: "Swadesh",
+      last_name: "Behera",
+      email: "swadesh@gmail.com",
+      mob_no: "9938562946",
+      address: "Cuttack"
+    };
+    const res = await request(url)
+      .patch(`/api/v1/users/${userId}`)
+      .send(payload)
+      .set("Content-Type", "application/json")
+      .set("Accept", "application/json");
+
+    expect(res.body.user.first_name).toEqual(payload.first_name);
+    expect(res.body.user.last_name).toEqual(payload.last_name);
+    expect(res.body.user.email).toEqual(payload.email);
+    expect(res.body.user.mob_no).toEqual(payload.mob_no);
+    expect(res.body.user.address).toEqual(payload.address);
+  });
+
+  it("should fail if wrong email format is provided", async () => {
+    const payload = {
+      first_name: "Swadesh",
+      last_name: "Nayak",
+      email: "swadesh@",
+      mob_no: "9938562946",
+      address: "Puri"
+    };
+    await request(url)
+      .patch(`/api/v1/users/${userId}`)
+      .send(payload)
+      .expect(StatusCodes.NOT_ACCEPTABLE);
+  });
+
+  it("should fail if any payload field is empty", async () => {
+    const payload = {
+      first_name: "Swadesh",
+      last_name: "",
+      email: "swadesh@",
+      mob_no: "9938562946",
+      address: "Puri"
+    };
+    await request(url)
+      .patch(`/api/v1/users/${userId}`)
+      .send(payload)
+      .expect(StatusCodes.NOT_ACCEPTABLE);
+  });
+});
