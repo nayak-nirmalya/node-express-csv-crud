@@ -83,23 +83,47 @@ const updateUser = async (req: Request, res: Response) => {
   const {
     params: { id: userId }
   } = req;
+  const { first_name, last_name, email, mob_no, address } = req.body;
+
+  const user: User = {
+    id: userId,
+    first_name,
+    last_name,
+    email,
+    mob_no,
+    address
+  };
 
   try {
     const data = readFileSync("./data/data.csv", "utf-8");
+
     const parsedData: User[] = parse(data, {
       columns: true,
       skip_empty_lines: true
     });
-    const user = parsedData.filter((u) => u.id === userId);
 
-    if (user.length === 0)
-      return res.status(409).json({
-        status: "Failed",
-        err: "No User with Given ID."
-      });
+    const users = parsedData.filter((u) => u.id !== userId);
+
+    const updatedUsers = users.concat(user);
+
+    stringify(
+      updatedUsers,
+      {
+        header: true
+      },
+      (err, output) => {
+        if (err)
+          return res.status(409).json({
+            status: "Failed",
+            err
+          });
+
+        writeFileSync("./data/data.csv", output);
+      }
+    );
 
     return res.status(200).json({
-      user
+      users
     });
   } catch (err) {
     return res.status(409).json({
@@ -121,7 +145,6 @@ const deleteUser = async (req: Request, res: Response) => {
       skip_empty_lines: true
     });
     const users = parsedData.filter((u) => u.id !== userId);
-    console.log(users);
 
     stringify(
       users,
