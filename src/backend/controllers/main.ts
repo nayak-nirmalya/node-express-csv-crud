@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { appendFileSync, readFileSync } from "fs";
+import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import { parse } from "csv-parse/sync";
 import { z } from "zod";
+import { stringify } from "csv-stringify";
+
 import { User } from "../middleware/validate";
 
 type User = z.infer<typeof User> & { id: string };
@@ -77,4 +79,39 @@ const getUser = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, getUsers, getUser };
+const deleteUser = async (req: Request, res: Response) => {
+  const {
+    params: { id: userId }
+  } = req;
+
+  try {
+    const data = readFileSync("./data/data.csv", "utf-8");
+    const parsedData: User[] = parse(data, {
+      columns: true,
+      skip_empty_lines: true
+    });
+    const users = parsedData.filter((u) => u.id !== userId);
+    console.log(users);
+
+    stringify(
+      users,
+      {
+        header: true
+      },
+      (err, output) => {
+        writeFileSync("./data/data.csv", output);
+      }
+    );
+
+    return res.status(200).json({
+      users
+    });
+  } catch (err) {
+    return res.status(409).json({
+      status: "Failed",
+      err
+    });
+  }
+};
+
+export { createUser, getUsers, getUser, deleteUser };
