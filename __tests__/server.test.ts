@@ -154,3 +154,18 @@ describe("PATCH /api/v1/users/:id", () => {
       .expect(StatusCodes.NOT_ACCEPTABLE);
   });
 });
+
+describe("DELETE /api/v1/users/:id", () => {
+  it("should delete user with id", async () => {
+    const resBefore = await request(url).get("/api/v1/users/");
+    const lengthBefore = resBefore.body.users.length;
+
+    await request(url).delete(`/api/v1/users/${userId}`);
+
+    const resAfter = await request(url).get("/api/v1/users/");
+    const lengthAfter = resAfter.body.users.length;
+
+    expect(lengthBefore).toBeGreaterThan(lengthAfter);
+    expect(lengthBefore - lengthAfter).toEqual(1);
+  });
+});
