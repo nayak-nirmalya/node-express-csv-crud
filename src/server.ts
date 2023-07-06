@@ -1,12 +1,19 @@
 import express, { Express, Request, Response } from "express";
 
 const app: Express = express();
-const port = 3000;
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send("All Good to Go!");
 });
 
-app.listen(port, () => {
-  console.log(`Server Listening on Port: ${port}`);
-});
+const PORT = 3000;
+
+const start = async () => {
+  try {
+    app.listen(PORT, () => console.log(`Server is Listening on PORT: ${PORT}`));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+start();
