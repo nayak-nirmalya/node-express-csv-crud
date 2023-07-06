@@ -1,12 +1,15 @@
 import express, { Express, Request, Response } from "express";
 
+import mainRouter from "./backend/routes/main.js";
+
 const app: Express = express();
+const PORT = 3000;
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send("All Good to Go!");
 });
 
-const PORT = 3000;
+app.use("/api/v1", mainRouter);
 
 const start = async () => {
   try {
