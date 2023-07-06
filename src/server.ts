@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 
-import mainRouter from "./backend/routes/userRoute.js";
+import userRouter from "./backend/routes/userRoute.js";
 
 const app: Express = express();
 const PORT = 3000;
@@ -11,7 +11,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.json());
 
-app.use("/api/v1/users", mainRouter);
+app.use("/api/v1/users", userRouter);
 
 const start = async () => {
   try {

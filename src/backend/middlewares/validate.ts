@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
 
 export const User = z.object({
   first_name: z
@@ -40,8 +41,7 @@ export const validate = async (
     await User.parseAsync(req.body);
     next();
   } catch (error) {
-    return res.status(409).json({
-      status: "Failed",
+    return res.status(StatusCodes.NOT_ACCEPTABLE).send({
       error
     });
   }
