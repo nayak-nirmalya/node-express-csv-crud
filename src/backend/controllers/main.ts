@@ -79,6 +79,36 @@ const getUser = async (req: Request, res: Response) => {
   }
 };
 
+const updateUser = async (req: Request, res: Response) => {
+  const {
+    params: { id: userId }
+  } = req;
+
+  try {
+    const data = readFileSync("./data/data.csv", "utf-8");
+    const parsedData: User[] = parse(data, {
+      columns: true,
+      skip_empty_lines: true
+    });
+    const user = parsedData.filter((u) => u.id === userId);
+
+    if (user.length === 0)
+      return res.status(409).json({
+        status: "Failed",
+        err: "No User with Given ID."
+      });
+
+    return res.status(200).json({
+      user
+    });
+  } catch (err) {
+    return res.status(409).json({
+      status: "Failed",
+      err
+    });
+  }
+};
+
 const deleteUser = async (req: Request, res: Response) => {
   const {
     params: { id: userId }
@@ -114,4 +144,4 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, getUsers, getUser, deleteUser };
+export { createUser, getUsers, getUser, updateUser, deleteUser };
