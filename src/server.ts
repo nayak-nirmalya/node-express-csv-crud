@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 
-import mainRouter from "./backend/routes/main.js";
+import mainRouter from "./backend/routes/userRoute.js";
 
 const app: Express = express();
 const PORT = 3000;

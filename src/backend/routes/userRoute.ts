@@ -6,8 +6,8 @@ import {
   getUser,
   getUsers,
   updateUser
-} from "../controllers/main.js";
-import { validate } from "../middleware/validate.js";
+} from "../controllers/userController.js";
+import { validate } from "../middlewares/validate.js";
 
 const router = Router();
 
