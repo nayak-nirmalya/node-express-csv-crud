@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Request, Response, NextFunction } from "express";
 
-const User = z.object({
+export const User = z.object({
   first_name: z
     .string({
       required_error: "First Name is Required."

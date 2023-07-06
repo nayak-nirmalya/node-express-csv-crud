@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { appendFileSync, readFileSync } from "fs";
+import { parse } from "csv-parse/sync";
+import { z } from "zod";
+import { User } from "../middleware/validate";
+
+type User = z.infer<typeof User> & { id: string };
 
 const createUser = async (req: Request, res: Response) => {
   if (!req.body) return res.status(400).json({ msg: "Not Enough Data!" });
@@ -27,21 +32,49 @@ const createUser = async (req: Request, res: Response) => {
 };
 
 const getUsers = async (req: Request, res: Response) => {
-  const { first_name, last_name, email, mob_no, address } = req.body;
-
   try {
     const data = readFileSync("./data/data.csv", "utf-8");
-    console.log(data);
+    const parsedData = parse(data, { columns: true, skip_empty_lines: true });
+
+    return res.status(200).json({
+      users: parsedData
+    });
   } catch (err) {
     return res.status(409).json({
       status: "Failed",
       err
     });
   }
-
-  res.status(200).json({
-    msg: "User Created!"
-  });
 };
 
-export { createUser, getUsers };
+const getUser = async (req: Request, res: Response) => {
+  const {
+    params: { id: userId }
+  } = req;
+
+  try {
+    const data = readFileSync("./data/data.csv", "utf-8");
+    const parsedData: User[] = parse(data, {
+      columns: true,
+      skip_empty_lines: true
+    });
+    const user = parsedData.filter((u) => u.id === userId);
+
+    if (user.length === 0)
+      return res.status(409).json({
+        status: "Failed",
+        err: "No User with Given ID."
+      });
+
+    return res.status(200).json({
+      user
+    });
+  } catch (err) {
+    return res.status(409).json({
+      status: "Failed",
+      err
+    });
+  }
+};
+
+export { createUser, getUsers, getUser };
