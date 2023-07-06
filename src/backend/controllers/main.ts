@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 
-const create = async (req: Request, res: Response) => {
-  // const { username, password } = req.body;
+const createUser = async (req: Request, res: Response) => {
+  if (!req.body) {
+    return res.status(400).json({ msg: "Not Enough Data!" });
+  }
 
-  // if (!username || !password) {
-  //   throw new BadRequestError("Please Provide E-Mail & Password!");
-  // }
+  const { first_name, last_name, email, mob_no, address } = req.body;
+
+  if (!first_name || !last_name || !email || !mob_no || !address) {
+    return res.status(400).json({ msg: "Fields Can Not Be Empty!" });
+  }
 
   const id = uuidv4();
 
@@ -16,4 +20,4 @@ const create = async (req: Request, res: Response) => {
   });
 };
 
-export { create };
+export { createUser };

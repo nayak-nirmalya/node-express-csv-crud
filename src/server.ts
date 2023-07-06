@@ -9,7 +9,9 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("All Good to Go!");
 });
 
-app.use("/api/v1", mainRouter);
+app.use(express.json());
+
+app.use("/api/v1/users", mainRouter);
 
 const start = async () => {
   try {
