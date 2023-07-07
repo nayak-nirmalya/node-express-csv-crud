@@ -103,7 +103,7 @@ function Add() {
           placeholder="Enter Your Address"
         />
         <button
-          className="bg-teal-600 outline-none font-bold border text-white border-zinc-400 py-4 pl-4 mt-4"
+          className="bg-gray-800 hover:bg-gray-700 outline-none font-bold border text-white border-zinc-400 py-4 pl-4 mt-4"
           type="submit"
           onClick={Update}
         >
