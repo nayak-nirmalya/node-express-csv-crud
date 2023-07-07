@@ -107,20 +107,20 @@ function Home() {
                         <td className="text-sm flex justify-between  items-center text-gray-900 font-bold px-6 py-4 space-x-4 whitespace-nowrap">
                           <Link
                             to={`/users/${data.id}`}
-                            className="bg-teal-600 text-white px-6 py-2 rounded-lg"
+                            className="bg-teal-600 hover:bg-teal-800 text-white px-6 py-2 rounded-lg"
                           >
                             VIew
                           </Link>
                           <Link
                             to={`/edit-user/${data.id}`}
-                            className="bg-blue-600 text-white px-6 py-2 rounded-lg"
+                            className="bg-blue-600 hover:bg-blue-800 text-white px-6 py-2 rounded-lg"
                           >
                             Edit
                           </Link>
                           <Link
                             onClick={() => deleteUser(data.id)}
                             to={"#"}
-                            className="bg-red-600 text-white px-6 py-2 rounded-lg"
+                            className="bg-red-600 hover:bg-red-800 text-white px-6 py-2 rounded-lg"
                           >
                             Delete
                           </Link>
