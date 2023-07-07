@@ -62,7 +62,7 @@ function Add() {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           className="bg-white/10 outline-none font-normal border border-zinc-400 py-6 pl-6 mt-4"
-          type="phone"
+          type="text"
           placeholder="Enter Your Address"
         />
         <button

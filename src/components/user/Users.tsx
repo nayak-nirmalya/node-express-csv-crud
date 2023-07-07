@@ -1,25 +1,28 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { z } from "zod";
+import { User } from "../../backend/middlewares/validate";
+
+type User = z.infer<typeof User> & { id: string };
 
 function Users() {
   const { id } = useParams();
 
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/users/${id}`).then((res) => {
-      setUser(res.data);
+    axios.get(`http://localhost:3000/api/v1/users/${id}`).then((res) => {
+      setUser(res.data.user[0]);
     });
-  }, []);
+  }, [id]);
 
-  console.log(user);
   return (
     <>
-      <div className="h-full w-full flex flex-col mt-32 justify-center items-center">
+      <div className="h-full w-full flex flex-col mt-8 justify-center items-center">
         <Link
           to={`/`}
-          className="hover:bg-teal-600 bg-white hover:shadow-md  outline-none rounded-xl font-bold border mt-8 hover:text-teal-200 text-teal-600 border-zinc-400 py-4 px-4 pl-4"
+          className="hover:bg-teal-600 bg-white hover:shadow-md outline-none rounded-xl font-bold border mt-8 hover:text-teal-200 text-teal-600 border-zinc-400 py-4 px-4 pl-4"
         >
           Back To Home
         </Link>
@@ -27,7 +30,10 @@ function Users() {
           <div className="w-[700px] h-[200] px-6 py-4 flex shadow-xl rounded-xl justify-center items-center bg-teal-600 mt-16 border-teal-800 border-2">
             <div className="w-5/12 flex flex-col space-y-4">
               <h2 className="text-white font-bold text-3xl border-black border-b-2">
-                Name
+                First Name
+              </h2>
+              <h2 className="text-white font-bold text-3xl border-black border-b-2">
+                Last Name
               </h2>
               <h2 className="text-white font-bold text-3xl border-black border-b-2">
                 Email
@@ -35,16 +41,25 @@ function Users() {
               <h2 className="text-white font-bold text-3xl border-black border-b-2">
                 Phone
               </h2>
+              <h2 className="text-white font-bold text-3xl border-black border-b-2">
+                Address
+              </h2>
             </div>
             <div className="w-7/12 flex flex-col space-y-4  ">
               <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
-                {user.name}
+                {user.first_name}
+              </h2>
+              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
+                {user.last_name}
               </h2>
               <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
                 {user.email}
               </h2>
               <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
-                {user.phone}
+                {user.mob_no}
+              </h2>
+              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
+                {user.address}
               </h2>
             </div>
           </div>
