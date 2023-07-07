@@ -86,24 +86,16 @@ Running commands with npm `npm run [command]`
 
 <div align='center'>
 
-### Home Screen
+### Home Page
 
-<img src="https://github.com/nayak-nirmalya/NikeApp/assets/52202635/a8385c41-ed84-44e2-9969-b86503e9c256" width="360">
+<img src="https://github.com/nayak-nirmalya/node-express-csv-crud/assets/52202635/ab707645-245f-4347-a8a1-937fdc1a5cc6" width="720">
 
-### Product Details Screen / Modal
+### Edit User
 
-<img src="https://github.com/nayak-nirmalya/NikeApp/assets/52202635/189d3c9e-1e9c-44b1-8a42-a27a1b2ab982" width="360">
+<img src="https://github.com/nayak-nirmalya/node-express-csv-crud/assets/52202635/c134ac35-6954-4af5-90fe-d54c9d55e4ad" width="720">
 
-### Cart Page
+### Test Cases
 
-<img src="https://github.com/nayak-nirmalya/NikeApp/assets/52202635/5c26ce19-ac2f-4dd2-a7cd-047e1c8181f6" width="360">
-
-### Stripe Payment Modal
-
-<img src="https://github.com/nayak-nirmalya/NikeApp/assets/52202635/158e2ece-42a3-4ad1-aaec-8501823ebd2e" width="360">
-
-### Order Confirmation Alert
-
-<img src="https://github.com/nayak-nirmalya/NikeApp/assets/52202635/46c5529d-50e9-4470-a9d5-85df9c0c3ba7" width="360">
+<img src="https://github.com/nayak-nirmalya/node-express-csv-crud/assets/52202635/c0c36e4f-1e41-43a8-a545-08988ad67f98" width="480">
 
 </div>
