@@ -1,13 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { z } from "zod";
+import { User } from "../backend/middlewares/validate";
+
+type User = z.infer<typeof User> & { id: string };
 
 function Home() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   function loadUsers() {
-    axios.get("http://localhost:3001/users").then((res) => {
-      setUsers(res.data.reverse());
+    axios.get("http://localhost:3000/api/v1/users/").then((res) => {
+      setUsers(res.data.users);
     });
   }
 
@@ -15,8 +19,10 @@ function Home() {
     loadUsers();
   }, []);
 
-  function deleteUser(id) {
-    axios.delete(`http://localhost:3001/users/${id}`).then(loadUsers());
+  function deleteUser(id: string) {
+    axios
+      .delete(`http://localhost:3000/api/v1/users/${id}`)
+      .then(() => loadUsers());
   }
 
   return (
@@ -40,7 +46,13 @@ function Home() {
                         scope="col"
                         className="text-sm font-lg text-white px-6 py-4"
                       >
-                        Name
+                        First Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-lg text-white px-6 py-4"
+                      >
+                        Last Name
                       </th>
                       <th
                         scope="col"
@@ -53,6 +65,12 @@ function Home() {
                         className="text-sm font-lg text-white px-6 py-4"
                       >
                         Phone
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-lg text-white px-6 py-4"
+                      >
+                        Address
                       </th>
                       <th
                         scope="col"
@@ -72,13 +90,19 @@ function Home() {
                           {index + 1}
                         </td>
                         <td className="text-xl text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                          {data.name}
+                          {data.first_name}
+                        </td>
+                        <td className="text-xl text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
+                          {data.last_name}
                         </td>
                         <td className="text-xl text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                           {data.email}
                         </td>
                         <td className="text-xl text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                          {data.phone}
+                          {data.mob_no}
+                        </td>
+                        <td className="text-xl text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
+                          {data.address}
                         </td>
                         <td className="text-sm flex justify-between  items-center text-gray-900 font-bold px-6 py-4 space-x-4 whitespace-nowrap">
                           <Link

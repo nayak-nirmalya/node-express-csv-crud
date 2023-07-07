@@ -9,14 +9,14 @@ import Users from "./components/user/Users";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Navbar />
       <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/home" exact element={<Home />} />
-        <Route path="/users/:id" exact element={<Users />} />
-        <Route path="/add-user" exact element={<Add />} />
-        <Route path="/edit-user/:id" exact element={<Edit />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/users/:id" element={<Users />} />
+        <Route path="/add-user" element={<Add />} />
+        <Route path="/edit-user/:id" element={<Edit />} />
       </Routes>
     </div>
   );

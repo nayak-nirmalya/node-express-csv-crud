@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import cors from "cors";
 
 import userRouter from "./backend/routes/user.route.js";
 
@@ -9,6 +10,7 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("All Good to Go!");
 });
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1/users", userRouter);
