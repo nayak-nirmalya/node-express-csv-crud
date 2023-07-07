@@ -28,7 +28,7 @@ function Home() {
   return (
     <>
       <div className="w-[100vw] h-full justify-center items-center flex flex-col px-10 py-8 mt-8">
-        <h1 className="text-3xl font-bold">DATA TABLE</h1>
+        <h1 className="text-3xl font-bold">USERS TABLE</h1>
         <div className="flex flex-col">
           <div className="overflow-x-auto mt-8 sm:-mx-6 items-center lg:-mx-8">
             <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
