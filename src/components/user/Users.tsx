@@ -22,45 +22,29 @@ function Users() {
       <div className="h-full w-full flex flex-col mt-8 justify-center items-center">
         <Link
           to={`/`}
-          className="hover:bg-teal-600 bg-white hover:shadow-md outline-none rounded-xl font-bold border mt-8 hover:text-teal-200 text-teal-600 border-zinc-400 py-4 px-4 pl-4"
+          className="hover:bg-gray-200 bg-white hover:shadow-md outline-none rounded-xl font-bold border mt-8 text-black border-zinc-400 py-2 px-4 pl-4"
         >
           Back To Home
         </Link>
         {user && (
-          <div className="w-[700px] h-[200] px-6 py-4 flex shadow-xl rounded-xl justify-center items-center bg-teal-600 mt-16 border-teal-800 border-2">
+          <div className="w-[800px] h-[200] px-6 py-4 flex shadow-xl rounded-xl justify-center items-center bg-gray-700 mt-16 border-white border-2">
             <div className="w-5/12 flex flex-col space-y-4">
-              <h2 className="text-white font-bold text-3xl border-black border-b-2">
-                First Name
-              </h2>
-              <h2 className="text-white font-bold text-3xl border-black border-b-2">
-                Last Name
-              </h2>
-              <h2 className="text-white font-bold text-3xl border-black border-b-2">
-                Email
-              </h2>
-              <h2 className="text-white font-bold text-3xl border-black border-b-2">
-                Phone
-              </h2>
-              <h2 className="text-white font-bold text-3xl border-black border-b-2">
-                Address
-              </h2>
+              <h2 className="text-gray-300 font-bold text-3xl">First Name</h2>
+              <h2 className="text-gray-300 font-bold text-3xl">Last Name</h2>
+              <h2 className="text-gray-300 font-bold text-3xl">Email</h2>
+              <h2 className="text-gray-300 font-bold text-3xl">Phone</h2>
+              <h2 className="text-gray-300 font-bold text-3xl">Address</h2>
             </div>
             <div className="w-7/12 flex flex-col space-y-4  ">
-              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
+              <h2 className="text-white font-bold text-3xl">
                 {user.first_name}
               </h2>
-              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
+              <h2 className="text-white font-bold text-3xl">
                 {user.last_name}
               </h2>
-              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
-                {user.email}
-              </h2>
-              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
-                {user.mob_no}
-              </h2>
-              <h2 className="text-teal-200 font-bold text-3xl border-black border-b-2">
-                {user.address}
-              </h2>
+              <h2 className="text-white font-bold text-3xl">{user.email}</h2>
+              <h2 className="text-white font-bold text-3xl">{user.mob_no}</h2>
+              <h2 className="text-white font-bold text-3xl">{user.address}</h2>
             </div>
           </div>
         )}
