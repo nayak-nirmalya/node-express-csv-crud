@@ -9,6 +9,8 @@ function Add() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const user = {
@@ -23,7 +25,8 @@ function Add() {
     event.preventDefault();
     axios
       .post("http://localhost:3000/api/v1/users/", user)
-      .then(() => navigate("/"));
+      .then(() => navigate("/"))
+      .catch(() => setErrorMessage("Wrong Data Given!"));
   }
 
   return (
@@ -49,14 +52,14 @@ function Add() {
           onChange={(e) => setEmail(e.target.value)}
           className="bg-white/10 outline-none font-normal border border-zinc-400 py-6 pl-6 mt-4"
           type="email"
-          placeholder="Enter Your Email"
+          placeholder="Enter Your Email. (Must Be of Valid Email Format. e.g. you@name.com)"
         />
         <input
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="bg-white/10 outline-none font-normal border border-zinc-400 py-6 pl-6 mt-4"
           type="phone"
-          placeholder="Enter Your Mobile No"
+          placeholder="Enter Your Mobile Number. (Must Be 10 Digit. e.g. 7008700870)"
         />
         <input
           value={address}
@@ -73,6 +76,7 @@ function Add() {
           ADD USER
         </button>
       </form>
+      <p className="text-red-600 mt-4">{errorMessage}</p>
     </div>
   );
 }
