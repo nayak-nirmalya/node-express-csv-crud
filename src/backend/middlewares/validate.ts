@@ -39,6 +39,11 @@ export const validate = async (
 ) => {
   try {
     await User.parseAsync(req.body);
+
+    req.body.first_name = req.body.first_name.replace(",", " ");
+    req.body.last_name = req.body.last_name.replace(",", " ");
+    req.body.address = req.body.address.replace(",", " ");
+
     next();
   } catch (error) {
     return res.status(StatusCodes.NOT_ACCEPTABLE).send({
