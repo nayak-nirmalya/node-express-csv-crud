@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "concurrently \"nodemon\" \"jest --coverage\"",
+    "test": "jest --coverage",
+    "test:server": "concurrently \"nodemon\" \"jest --coverage\"",
+    "fullstack": "concurrently \"nodemon\" \"vite\"",
     "dev": "vite",
     "dev:server": "nodemon",
     "build": "tsc && vite build",

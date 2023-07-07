@@ -18,7 +18,7 @@ Key Features:
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/nayak-nirmalya/messenger-clone.git
+git clone https://github.com/nayak-nirmalya/node-express-csv-crud.git
 ```
 
 ### Install packages
@@ -27,38 +27,44 @@ git clone https://github.com/nayak-nirmalya/messenger-clone.git
 npm i
 ```
 
-### Setup .env file
-
-```js
-DATABASE_URL=
-
-NEXTAUTH_JWT_SECRET=
-NEXTAUTH_SECRET=
-
-GITHUB_ID=
-GITHUB_SECRET=
-
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
-
-NEXT_PUBLIC_PUSHER_APP_KEY=
-PUSHER_APP_ID=
-PUSHER_SECRET=
-PUSHER_CLUSTER=
-```
-
-### Setup Prisma
+### Start the Backend (Express Server)
 
 ```shell
-npx prisma db push
+npm run dev:server
 ```
 
-### Start the App
+### Run Test Cases
+
+First Start the Dev Server and then in another terminal Run Test Cases as Below.
 
 ```shell
+npm run dev:server
+npm run test
+```
+
+#### OR
+
+to run concurrently (It will start the dev server and run test suit.)
+
+```shell
+npm run test:server
+```
+
+### Start Frontend
+
+First Start the Dev Server and then in another terminal start React Vite Server.
+
+```shell
+npm run dev:server
 npm run dev
+```
+
+#### OR
+
+to run concurrently (It will start the dev and react server.)
+
+```shell
+npm run fullstack
 ```
 
 ## Available commands
